@@ -1,0 +1,16 @@
+<br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-user"></span> Delete users
+    </div>
+    <div class="panel-body">
+      <div ng-repeat="user in users">
+        <strong>{{user.name}}</strong><br>
+        <span class="text-muted">{{user.email}}</span>
+        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+        <hr ng-if="!$last" />
+      </div>
+    </div>
+  </div>
+</div>

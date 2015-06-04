@@ -1,0 +1,57 @@
+<br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-edit"></span> Edit TV show
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-12">
+        <form class="form" name="form" ng-submit="editShow(form)" novalidate>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" name="name" class="form-control" ng-model="name" required>
+          </div>
+          <div class="form-group">
+            <label>Synopsis</label>
+            <input type="text" name="synopsis" class="form-control" ng-model="synopsis" required>
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <input type="text" name="status" class="form-control" ng-model="status" required>
+          </div>
+          <div class="form-group">
+            <label>Network</label>
+            <input type="text" name="network" class="form-control" ng-model="network" required>
+          </div>
+          <div class="form-group">
+            <label>Genre(s)</label>
+            <input type="text" name="genre" class="form-control" ng-model="genre" required>
+          </div>
+          <div class="form-group has-error">
+            <p class="help-block" ng-show="form.name.$error.required && submitted">
+              Please enter the name for the TV Show.
+            </p>
+            <p class="help-block" ng-show="form.synopsis.$error.required && submitted">
+              Please enter the synopsis for the TV Show.
+            </p>
+            <p class="help-block" ng-show="form.status.$error.required && submitted">
+              Please enter the status for the TV Show.
+            </p>
+            <p class="help-block" ng-show="form.network.$error.required && submitted">
+              Please enter the network for the TV Show.
+            </p>
+            <p class="help-block" ng-show="form.genre.$error.required && submitted">
+              Please enter the genre for the TV Show.
+            </p>
+            <p class="help-block">{{ errors.other }}</p>
+          </div>
+          <div>
+            <button class="btn btn-inverse btn-lg btn-login" type="submit">
+              Edit
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,76 @@
+</br>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="media">
+        <div class="pull-left">
+          <img class="media-object img-rounded" height="321" width="214" ng-src="{{episode.episode_poster}}">
+        </div>
+        <div class="media-body">
+          <h2 class="media-heading">
+            {{episode.episode_name}}
+            <span class="pull-right text-danger">{{notes}}</span>
+          </h2>
+          <h4>
+            <span class="glyphicon glyphicon-calendar text-danger"></span>
+            Duration: <span class="text-danger">{{episode.duration_time}}</span>
+          </h4>
+          </br>
+          <h4><b>Season</b> : {{episode.season_number}} <b>Episode</b> : {{episode.episode_number}}</h4>
+          </br>
+          <h4>Synopsis : </h4>
+          <p>{{episode.synopsis}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  </br>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-comment"></span> Share a comment
+    </div>
+    <div class="text-center" ng-if="!isLoggedIn()">
+      <a href="/login"> Login to share a comment! </a>
+    </div>
+    <div class="panel-body" ng-if="isLoggedIn()">
+      <p>Write a comment below : </p>
+      <form class="form" name="form" ng-submit="addEpisode(form)">
+        <div class="input-group">
+          <textarea placeholder="Write your comment here" name ="content" ng-model="$parent.content" cols="80" rows="5"></textarea>
+        </div>
+        <div class="input-group">
+          <button class="btn btn-danger" type="submit">
+            Write a comment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  </br>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-comment"></span> Comments
+    </div>
+    <div class="panel-body">
+      <div ng-show="hasNoComments">
+        <p>No comment at the moment.</p>
+      </div>
+      <div ng-repeat="comment in comments">
+        <h4><small>Written by </small>
+          <b>{{comment.author}}</b>
+        </h4>
+        <p>
+          <span class="glyphicon glyphicon-calendar"></span>
+          {{comment.date | date : 'short'}}
+        </p>
+        <p>{{comment.content}}</p>
+        <hr ng-if="!$last" />
+      </div>
+    </div>
+  </div>
+</div>
+</div>

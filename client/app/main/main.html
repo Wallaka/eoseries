@@ -1,0 +1,16 @@
+<br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-movies"></span> TV shows
+    </div>
+    <div class="panel-body">
+      <div ng-repeat="show in shows">
+        <h4>
+          <b><a ui-sref="detailsShow({ idShow : '{{show.show_id}}' })"  tooltip="{{show.info}}">{{show.name}}</a></b>
+        </h4>
+        <hr ng-if="!$last" />
+      </div>
+    </div>
+  </div>
+</div>

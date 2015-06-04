@@ -1,0 +1,44 @@
+<br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-plus"></span> Add TV show
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-12">
+        <form class="form" name="form" ng-submit="addShow(form)" novalidate>
+          <div class="form-group">
+            <label>Name</label>
+            <input type="show" name="name" class="form-control" ng-model="name" required>
+          </div>
+          <div class="form-group has-error">
+            <p class="help-block" ng-show="form.name.$error.required && submitted">
+              Please enter a name.
+            </p>
+            <p class="help-block">{{ errors.other }}</p>
+          </div>
+          <div>
+            <button class="btn btn-inverse btn-lg btn-login" type="submit">
+              Add
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-edit"></span> Edit or delete TV show
+    </div>
+    <div class="panel-body">
+      <div ng-repeat="show in shows">
+        <strong>{{show.name}}</strong><br>
+        <span class="text-muted">{{show.show_id}}</span>
+        <a ng-click="delete(show)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+        <a ui-sref="show_edit({show_id: '{{show.show_id}}'})" class="edit"><span class="glyphicon glyphicon-edit pull-right"></span></a>
+        <a ui-sref="episode_delete({show_id: '{{show.show_id}}'})" class="edit"><span class="glyphicon glyphicon-film pull-right"></span></a>
+        <hr ng-if="!$last" />
+      </div>
+    </div>
+  </div>
+</div>

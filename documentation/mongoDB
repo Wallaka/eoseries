@@ -1,0 +1,28 @@
+Plusieurs entites: Users, Shows, Comments, Notes
+
+Users: - Existing models +
+       - SuscribedShows : [ showsId : [episodesId, episodeId ...]];
+
+Shows:
+ - Title: String
+ - Synopsis : String
+ - Status : String
+ - Network : String
+ - Genre : array of String
+ - Episodes : Array of Objects (Episodes Object)
+ - Comments: Array of Objects (Comments Object)
+ - Notes: Array of Objects (Notes Object)
+
+Episodes:
+- EpisodeNumber : String
+- Name : String
+- Duration : Int
+- Release : Date
+- Synopsis : String
+- Comments : Array of Comments
+- Note : Array of String - id        Example : ['1Stars' : 500]...
+ 
+Comments:
+ - Author: String
+ - Date: String
+ - Content: String

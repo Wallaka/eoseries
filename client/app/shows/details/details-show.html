@@ -1,0 +1,130 @@
+</br>
+<div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="media">
+        <div class="pull-left">
+          <img class="media-object img-rounded" height="321" width="214" ng-src="{{show.poster}}">
+          <div class="text-center" ng-if="isLoggedIn()">
+            <div ng-if="subscribed == false">
+              <button ng-click="subscribe()" class="btn btn-block btn-success">
+                <span class="glyphicon glyphicon-plus"></span> Subscribe
+              </button>
+            </div>
+            <div ng-if="subscribed == true">
+              <button ng-click="unsubscribe()" class="btn btn-block btn-danger">
+                <span class="glyphicon glyphicon-minus"></span> Unsubscribe
+              </button>
+            </div>
+          </div>
+          <div class="text-center" ng-show="!isLoggedIn()">
+            <a class="btn btn-block btn-primary" href="/login">Login to Subscribe</a>
+          </div>
+        </div>
+        <div class="media-body">
+          <h2 class="media-heading">
+            {{show.name}}
+            <span class="pull-right text-danger">{{notes}}</span>
+          </h2>
+          <h4>
+            <span class="glyphicon glyphicon-calendar text-danger"></span>
+            Wednesday <em>9:00 PM</em> on
+            {{show.network}}
+          </h4>
+          <h4>
+            Status: <span class="text-danger">{{show.status}}</span>
+          </h4>
+          </br>
+          <h4>Synopsis : </h4>
+          <p>{{show.synopsis}}</p>
+          <div ng-show="!hasVoted">
+          Rate your show!
+          <rating ng-model="rate" max="max" readonly="isReadonly" on-hover="hoveringOver(value)" on-leave="overStar = null"></rating>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert alert-info">
+    The next episode starts never.
+  </div>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-film"></span> Episodes of {{show.name}}
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="btn-group" role="group" aria-label="..." ng-repeat="i in getTimes(episodes.count_seasons) track by $index">
+          <button type="button" class="btn btn-primary" ng-click="changeCurrentSeason($index + 1)">Season {{$index + 1}}</button>
+        </div>
+      </div>
+    </div>
+    </br>
+
+    <div class="panel-body">
+      <p>{{episodes.count_seasons }} <b>seasons</b>, {{episodes.count_episodes }} <b>episodes</b>.</p>
+      </br>
+      <div ng-repeat="episode in episodes | orderBy:'+episode_number'">
+        <div ng-show="episode.season_number == current_season">
+          <h4><b><a ui-sref="detailsEpisode({ idShow : '{{show.show_id}}', idEpisode : '{{episode.episode_id}}' })" tooltip="{{episode.name}}">{{episode.episode_name}}</a></b>
+            <small>Season {{episode.season_number}}, Episode {{episode.episode_number}}</small>
+          </h4>
+          <hr ng-if="!$last" />
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  </br>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <span class="glyphicon glyphicon-comment"></span> Share a comment
+    </div>
+    <div class="text-center" ng-if="!isLoggedIn()">
+      <a href="/login"> Login to share a comment! </a>
+      </div>
+    <div class="panel-body" ng-if="isLoggedIn()">
+      <p>Write a comment below : </p>
+      <form class="form" name="form" ng-submit="addEpisode(form)">
+        <div class="input-group">
+          <textarea placeholder="Write your comment here" name ="content" ng-model="$parent.content" cols="80" rows="5"></textarea>
+        </div>
+        <div class="input-group">
+          <button class="btn btn-danger" type="submit">
+            Write the comment
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  </br>
+
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <span class="glyphicon glyphicon-comment"></span> Comments
+  </div>
+
+  <div class="panel-body">
+    <div ng-show="hasNoComments">
+      <p>No comment at the moment.</p>
+    </div>
+    <div ng-repeat="comment in comments">
+      <h4><small>Written by </small>
+      <b>{{comment.author}}</b>
+      </h4>
+      <p>
+        <span class="glyphicon glyphicon-calendar"></span>
+        {{comment.date | date : 'short'}}
+      </p>
+      <p>{{comment.content}}</p>
+      <hr ng-if="!$last" />
+    </div>
+  </div>
+</div>
+</div>
+</div>
